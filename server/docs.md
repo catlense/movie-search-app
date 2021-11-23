@@ -1,6 +1,8 @@
 # Movie search app server docs
 
 ## Auth methods
+
+### Register
 ```
 /auth/register
 ```
@@ -24,3 +26,5 @@ Response:
     "__v": 0
 }
 ```
+
+Description: creates a new user object and sends a confirmation email to it with a key link that leads to /verify?key={key}
