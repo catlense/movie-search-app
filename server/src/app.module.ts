@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RegisterModule } from './register/register.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [RegisterModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/movie-search-app')],
+  imports: [AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/movie-search-app'), AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

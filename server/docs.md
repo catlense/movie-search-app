@@ -1,0 +1,26 @@
+# Movie search app server docs
+
+## Auth methods
+```
+/auth/register
+```
+Body:
+* first_name - user name
+* last_name - user surname
+* email - user email
+* password - user password
+
+Response:
+```
+{
+    "activated": false,
+    "activateCode": "41f37c67-e77a-4138-b89d-7c5310c3ced7",
+    "password": "testpwd",
+    "email": "max@voronin.xyz",
+    "last_name": "Voronin",
+    "first_name": "Maxim",
+    "uid": 1,
+    "_id": "619d31836356289d325db061",
+    "__v": 0
+}
+```
