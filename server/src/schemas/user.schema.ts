@@ -1,11 +1,10 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-
   @Prop()
   uid: number;
 
@@ -24,8 +23,8 @@ export class User {
   @Prop()
   activateCode: string;
 
-  @Prop({default: false})
+  @Prop({ default: false })
   activated: boolean;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const UserSchema = SchemaFactory.createForClass(User);

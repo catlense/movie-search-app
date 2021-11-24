@@ -3,16 +3,20 @@
 ## Auth methods
 
 ### Register
+=======
 ```
 /auth/register
 ```
+
 Body:
-* first_name - user name
-* last_name - user surname
-* email - user email
-* password - user password
+
+- first_name - user name
+- last_name - user surname
+- email - user email
+- password - user password
 
 Response:
+
 ```
 {
     "activated": false,
@@ -26,7 +30,6 @@ Response:
     "__v": 0
 }
 ```
-
 Description: creates a new user object and sends a confirmation email to it with a key link that leads to /verify?key={key}
 
 
