@@ -65,10 +65,18 @@ export class AuthService {
           border-radius: 8px;
         }
       </style>
-      ` // html body
+      `
     });
 
     return newUser.save()
+  }
+
+  async authUser(userData: UserDto) {
+    const user = await this.userModel.findOne({email: userData.email, password: userData.password}).exec()
+
+    if(!user) return {status: 404, text: "Пользователь не найден"}
+
+    return user
   }
 
 }
