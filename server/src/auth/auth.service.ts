@@ -1,45 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument, UserSchema } from 'src/schemas/user.schema';
+import { User, UserDocument } from 'src/schemas/user.schema';
 import { UserDto } from './dto/user-register.dto';
-import { v4 } from 'uuid'
-import { validate } from 'email-validator'
-import {createTransport} from 'nodemailer'
+import { v4 } from 'uuid';
+import { validate } from 'email-validator';
+import { createTransport } from 'nodemailer';
 
 @Injectable()
 export class AuthService {
-
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async registerUser(userData: UserDto) {
-    const user = await this.userModel.findOne({email: userData.email}).exec()
+    const user = await this.userModel.findOne({ email: userData.email }).exec();
 
-    if(user) return {status: 403, text: "Пользователь с такой почтой уже существует"}
-    if(!validate(userData.email)) return {status: 403, text: "Проверьте адрес электронной почты"}
-    const activateCode = v4()
+    if (user)
+      return {
+        status: 403,
+        text: 'Пользователь с такой почтой уже существует',
+      };
+    if (!validate(userData.email))
+      return { status: 403, text: 'Проверьте адрес электронной почты' };
+    const activateCode = v4();
     const newUser = new this.userModel({
       ...userData,
-      uid: await this.userModel.count() + 1,
-      activateCode
-    })
+      uid: (await this.userModel.count()) + 1,
+      activateCode,
+    });
 
-    let transporter = createTransport({
-      host: "smtp.yandex.ru",
+    const transporter = createTransport({
+      host: 'smtp.yandex.ru',
       port: 465,
       auth: {
-        user: "noreply@voronin.xyz", // generated ethereal user
-        pass: "Qpwoei@123456", // generated ethereal password
+        user: 'noreply@voronin.xyz', // generated ethereal user
+        pass: 'Qpwoei@123456', // generated ethereal password
       },
     });
 
     await transporter.sendMail({
       from: 'Movie Seach App <noreply@voronin.xyz>', // sender address
       to: userData.email, // list of receivers
-      subject: "Подтверждение аккаунта", // Subject line
+      subject: 'Подтверждение аккаунта', // Subject line
       text: `Ваш код подтверждения`, // plain text body
-      html: 
-      `
+      html: `
       <div>
         <h1>Подтверждение аккаунта</h1>
         <p>Для подтверждения аккаунта нажмите на кнопку ниже. Если Вы ничего не делали просто проигнорируйте это письмо.</p>
@@ -65,10 +68,9 @@ export class AuthService {
           border-radius: 8px;
         }
       </style>
-      ` // html body
+      `, // html body
     });
 
-    return newUser.save()
+    return newUser.save();
   }
-
 }

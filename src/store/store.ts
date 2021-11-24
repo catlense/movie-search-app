@@ -1,15 +1,16 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {filmAPI} from "../services/FilmService";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { filmAPI } from "../services/FilmService";
 
-const rootReducer = combineReducers ( {
-    [filmAPI.reducerPath]: filmAPI.reducer
-} );
+const rootReducer = combineReducers({
+  [filmAPI.reducerPath]: filmAPI.reducer,
+});
 
 export const setupStore = () => {
-    return configureStore ( {
-        reducer: rootReducer,
-        middleware: ( getDefaultMiddleware) => getDefaultMiddleware ().concat ( filmAPI.middleware )
-    } );
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(filmAPI.middleware),
+  });
 };
 
 export type RootState = ReturnType<typeof rootReducer>;

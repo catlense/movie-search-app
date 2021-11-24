@@ -1,16 +1,20 @@
 # Movie search app server docs
 
 ## Auth methods
+
 ```
 /auth/register
 ```
+
 Body:
-* first_name - user name
-* last_name - user surname
-* email - user email
-* password - user password
+
+- first_name - user name
+- last_name - user surname
+- email - user email
+- password - user password
 
 Response:
+
 ```
 {
     "activated": false,

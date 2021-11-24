@@ -4,13 +4,11 @@ import { UserDto } from './dto/user-register.dto';
 
 @Controller('auth')
 export class AuthController {
-
   constructor(private authService: AuthService) {}
 
   @Post('/register')
   @HttpCode(HttpStatus.CREATED)
   register(@Body() userData: UserDto) {
-    return this.authService.registerUser(userData)
+    return this.authService.registerUser(userData);
   }
-
 }
