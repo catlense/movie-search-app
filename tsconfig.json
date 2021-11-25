@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "checkJs": true,
+    "downlevelIteration": true,
     "allowJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -22,6 +24,9 @@
     "target": "es2018",
     "incremental": true,
     "allowSyntheticDefaultImports": true
+  },
+  "typeAcquisition": {
+    "enable": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

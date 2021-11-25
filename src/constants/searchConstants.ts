@@ -1,0 +1,1 @@
+export const searchConstants: string[] = ['Популярно', 'Бесплатное', 'В тренде', 'Последние трейлеры']
